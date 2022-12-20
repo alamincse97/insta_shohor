@@ -19,19 +19,24 @@ const isLiked = (id) => {
 const addToLiked = (id) => {
   // fixed addToLiked after reported
    const remainingPosts = posts.filter((post) => !reportedPostsId.includes(post.id));
+   const remainingLikedPost =reportPost();
   //  change plus to push
     likedPostsId.push(id); 
     showPosts(remainingPosts);
+    showPosts(remainingLikedPost);
 };
 
 const reportPost = (id) => {
     reportedPostsId.push(id);
     const remainingPosts = posts.filter((post) => !reportedPostsId.includes(post.id));
     showPosts(remainingPosts);
+    return remainingPosts;
 };
 
 const displayContent = (text) => {
     return text.length < 30 ? 'text' : text.slice(0, 30) + "<span class='fw-bold'>... read more</span>";
+  // fixed text on description
+  return text.length < 30 ? text : text.slice(0, 30) + "<span class='fw-bold'>... read more</span>";;
 };
 
 const switchTab = (id) => {
