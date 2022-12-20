@@ -151,7 +151,10 @@ const showPosts = (posts) => {
     });
 };
 
+const displayLikedPosts = (post) => {
 const displayLikedPosts = () => {
+  // fixed display liked 
+  document.getElementById( "liked" ).innerHTML='';
   const displayLikedPosts = (post) => {
     // console.log(post)
     const likedPosts = getLikedPosts();
