@@ -50,7 +50,33 @@ img {
   grid-template-columns: repeat(3, 1fr);
   width: 100%;
   margin: auto;
-  align-items: center;
+  justify-content: center;
+}
+
+/* fixed liked-div and reported-div css */
+#liked-div {
+  display: none;
+}
+#reported-div {
+  display: none;
+}
+
+/* fixed liked and reported css */
+#liked {
+  display: none;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+  margin: auto;
+  justify-content: center;
+}
+
+#reported {
+  display: none;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+  margin: auto;
   justify-content: center;
 }
 
@@ -236,39 +262,12 @@ img {
   margin: 10px 0;
   color: gray;
 }
-/* fixed like and reported css */
-#liked-div {
-  display: none;
-}
-#reported-div {
-  display: none;
-}
-#liked {
-  display: none;
-  grid-template-columns: repeat(3, 1fr);
-  justify-items: center;
-  gap: 10px;
-  width: 100%;
-  margin: auto;
-  align-items: center;
-  justify-content: center;
-}
-#reported {
-  display: none;
-  grid-template-columns: repeat(3, 1fr);
-  justify-items:center
-  gap: 10px;
-  width: 100%;
-  margin: auto;
-  align-items: center;
-  justify-content: center;
-  justify-items: center;
-}
 
 @media only screen and (max-width: 992px) {
   #posts {
     grid-template-columns: repeat(2, 1fr);
   }
+
   #liked {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -283,6 +282,7 @@ img {
   #liked {
     grid-template-columns: repeat(1, 1fr);
   }
+
   #reported {
     grid-template-columns: repeat(1, 1fr);
   }

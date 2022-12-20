@@ -12,17 +12,14 @@ const getReportedPosts = () => {
 };
 
 const isLiked = (id) => {
-  console.log(id)
     return likedPostsId?.length && !!likedPostsId.includes(id);
 };
 
 const addToLiked = (id) => {
   // fixed addToLiked after reported
-   const remainingPosts = posts.filter((post) => !reportedPostsId.includes(post.id));
    const remainingLikedPost =reportPost();
   //  change plus to push
     likedPostsId.push(id); 
-    showPosts(remainingPosts);
     showPosts(remainingLikedPost);
 };
 
@@ -34,7 +31,6 @@ const reportPost = (id) => {
 };
 
 const displayContent = (text) => {
-    return text.length < 30 ? 'text' : text.slice(0, 30) + "<span class='fw-bold'>... read more</span>";
   // fixed text on description
   return text.length < 30 ? text : text.slice(0, 30) + "<span class='fw-bold'>... read more</span>";;
 };
@@ -46,31 +42,37 @@ const switchTab = (id) => {
         document.getElementById( "liked-div" ).style.display = "none";
         document.getElementById( "reported" ).style.display = "none";
         document.getElementById( "reported-div" ).style.display = "none";
+        // update question answer div and footer div
+        document.getElementById( "question-answer" ).style.display = "block";
+        document.getElementById( "footer-div" ).style.display = "block";
     } else if (id === "liked") {
-        document.getElementById( "liked" ).style.display = "block";
         document.getElementById( "liked" ).style.display = "grid";
-        document.getElementById("liked-div").style.display = "block";
-        document.getElementById("posts").style.display = "none";
+        document.getElementById( "liked-div" ).style.display = "block";
+        document.getElementById( "posts" ).style.display = "none";
         document.getElementById( "reported" ).style.display = "none";
-        document.getElementById("reported-div").style.display = "none";
+        document.getElementById( "reported-div" ).style.display = "none";
+        // update question answer div and footer div
+        document.getElementById( "question-answer" ).style.display = "none";
+        document.getElementById( "footer-div" ).style.display = "none";
 
         displayLikedPosts();
     } else {
-        document.getElementById( "reported" ).style.display = "block";
         document.getElementById( "reported" ).style.display = "grid";
         document.getElementById( "reported-div" ).style.display = "block";
         document.getElementById( "posts" ).style.display = "none";
         document.getElementById( "liked" ).style.display = "none";
-        ocument.getElementById( "liked-div" ).style.display = "none";
+        document.getElementById( "liked-div" ).style.display = "none";
+        // update question answer div and footer div
+        document.getElementById( "question-answer" ).style.display = "none";
+        document.getElementById( "footer-div" ).style.display = "none";
 
         displayReportedPosts();
     }
 };
 
 const createPost = (post) => {
-    const image = post.image;
-    // get image = post.image;
-    const userImage=post?.userImage
+  // get user image
+  const userImage=post?.userImage
     const image = post?.image;
     const div = document.createElement( "article" );
     div.classList.add( "post" );
@@ -82,7 +84,8 @@ const createPost = (post) => {
                     target="_blank"
                     class="post__avatar"
                   >
-                    <img src="${image}" alt="User Picture" />
+                  <!-- fixed user image--->
+                    <img src="${userImage}" alt="User Picture" />
                   </a>
                   <a href="#" class="post__user">phero</a>
                 </div>
@@ -122,7 +125,7 @@ const createPost = (post) => {
                   </button>
                 </div>
 
-                <div class="post__content">${displayContent(post.description)}</div>
+                <div class="post__content">${displayContent(post?.description)}</div>
 
                 <div class="post__infos">
                   <div class="post__likes">
@@ -139,10 +142,11 @@ const createPost = (post) => {
 
                   <div class="post__description">
                     <small>
+                    <!-- fixed user comments user and comments text --->
                       <a class="post__name--underline" href="#">
-                          ${post.comments?.user}
+                          ${post?.comments[0]?.user}
                       </a>
-                      ${post.comments?.text}
+                      ${post?.comments[0]?.text}
                     </small>
                   </div>
                   <span class="post__date-time">30 minutes ago</span>
@@ -153,52 +157,39 @@ const createPost = (post) => {
 };
 
 const showPosts = (posts) => {
-    const productsContainer = document.getElementById( "posts" );
-    productsContainer.innerHTML = "";
+  const productsContainer = document.getElementById( "posts" );
+  productsContainer.innerHTML = "";
 
-    posts.forEach((post) => {
-        const div = createPost(post);
-        productsContainer.appendChild(div);
-    });
+  posts.forEach((post) => {
+      const div = createPost(post);
+      productsContainer.appendChild(div);
+  });
 };
 
-const displayLikedPosts = (post) => {
 const displayLikedPosts = () => {
-  // fixed display liked 
+  // fixed display liked post
   document.getElementById( "liked" ).innerHTML='';
-  document.getElementById( "liked" ).innerHTML=``;
-    // console.log(post)
-  const displayLikedPosts = (post) => {
-    // console.log(post)
-    const likedPosts = getLikedPosts();
-    console.log(likedPosts )
-    console.log(likedPosts.indexOf())
-    if (likedPosts.indexOf()!==-1){
-      likedPosts.forEach((post) => {
-        const div = createPost(post);
-        document.getElementById( "liked" ).appendChild(div);
-    });
-  }
-  else{
-    console.log('done');
-  }
+  const likedPosts = getLikedPosts();
+  likedPosts.forEach((post) => {
+      const div = createPost(post);
+      document.getElementById( "liked" ).appendChild(div);
+  });
 };
 
 const displayReportedPosts = () => {
-    const reportedPosts = getReportedPosts();
-    posts.forEach((post) => {
-      // console.log(reportedPosts)
-    // fixed reported post
-    reportedPosts.forEach((post) => {
-        const div = createPost(post);
-        document.getElementById( "reported" ).appendChild(div);
-    });
+  // fixed displayreport post
+  document.getElementById( "reported" ).innerHTML = '';
+  const reportedPosts = getReportedPosts();
+  reportedPosts.forEach((post) => {
+      const div = createPost(post);
+      document.getElementById( "reported" ).appendChild(div);
+  });
 };
 
 const loadPosts = async () =>{
-  let data = await fetch('https://raw.githubusercontent.com/ProgrammingHero1/insta-shohor/main/data/posts.json');
-  posts = await data.json();
-  showPosts(posts);
+let data = await fetch('../data/posts.json');
+posts = await data.json();
+showPosts(posts);
 }
 
 loadPosts();
