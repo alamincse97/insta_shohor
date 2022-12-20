@@ -237,6 +237,12 @@ img {
   color: gray;
 }
 /* fixed like and reported css */
+#liked-div {
+  display: none;
+}
+#reported-div {
+  display: none;
+}
 #liked {
   display: none;
   grid-template-columns: repeat(3, 1fr);

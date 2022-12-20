@@ -152,16 +152,28 @@ const showPosts = (posts) => {
 };
 
 const displayLikedPosts = () => {
+  const displayLikedPosts = (post) => {
+    // console.log(post)
     const likedPosts = getLikedPosts();
-    likedPosts.forEach((post) => {
+    console.log(likedPosts )
+    console.log(likedPosts.indexOf())
+    if (likedPosts.indexOf()!==-1){
+      likedPosts.forEach((post) => {
         const div = createPost(post);
         document.getElementById( "liked" ).appendChild(div);
     });
+  }
+  else{
+    console.log('done');
+  }
 };
 
 const displayReportedPosts = () => {
     const reportedPosts = getReportedPosts();
     posts.forEach((post) => {
+      // console.log(reportedPosts)
+    // fixed reported post
+    reportedPosts.forEach((post) => {
         const div = createPost(post);
         document.getElementById( "reported" ).appendChild(div);
     });
