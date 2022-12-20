@@ -247,10 +247,21 @@ img {
   display: none;
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
 }
 #reported {
   display: none;
   grid-template-columns: repeat(3, 1fr);
+  justify-items:center
+  gap: 10px;
+  width: 100%;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
   justify-items: center;
 }
 
